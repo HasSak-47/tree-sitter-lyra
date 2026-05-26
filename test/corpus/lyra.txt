@@ -1,0 +1,39 @@
+================================================================================
+lyra-simple-test
+================================================================================
+
+for i=0, 10, 1 do
+    $echo $i
+    print('fuck')
+end
+
+--------------------------------------------------------------------------------
+
+(chunk
+  (for_statement
+    clause: (for_numeric_clause
+      name: (identifier)
+      start: (number)
+      end: (number)
+      step: (number))
+    body: (block
+      (lyra_statement
+        (lyra_list
+          (lyra_pipeline
+            (lyra_command
+              (lyra_simple_command
+                (lyra_cmd_word
+                  (lyra_word
+                    (lyra_word_head
+                      (identifier))))
+                (lyra_cmd_suffix
+                  (lyra_word
+                    (lyra_word_head
+                      (lyra_variable
+                        (lyra_name
+                          (identifier)))))))))))
+      (function_call
+        name: (identifier)
+        arguments: (arguments
+          (string
+            content: (string_content)))))))

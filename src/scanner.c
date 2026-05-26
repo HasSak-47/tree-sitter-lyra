@@ -11,6 +11,8 @@ enum TokenType {
   BLOCK_STRING_START,
   BLOCK_STRING_CONTENT,
   BLOCK_STRING_END,
+
+  LYRA_LINE_END,
 };
 
 static inline void consume(TSLexer *lexer) { lexer->advance(lexer, false); }
@@ -156,6 +158,28 @@ static bool scan_comment_content(Scanner *scanner, TSLexer *lexer) {
 
 bool tree_sitter_lua_external_scanner_scan(void *payload, TSLexer *lexer, const bool *valid_symbols) {
   Scanner *scanner = (Scanner *)payload;
+
+  if (valid_symbols[LYRA_LINE_END]) {
+    if (lexer->lookahead == 0) {
+      lexer->result_symbol = LYRA_LINE_END;
+      return true;
+    }
+
+    if (lexer->lookahead == '\r') {
+      consume(lexer);
+      if (lexer->lookahead == '\n') {
+        consume(lexer);
+      }
+      lexer->result_symbol = LYRA_LINE_END;
+      return true;
+    }
+
+    if (lexer->lookahead == '\n') {
+      consume(lexer);
+      lexer->result_symbol = LYRA_LINE_END;
+      return true;
+    }
+  }
 
   if (valid_symbols[BLOCK_STRING_END] && scan_block_end(scanner, lexer)) {
     reset_state(scanner);

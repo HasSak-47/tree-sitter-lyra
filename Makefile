@@ -1,5 +1,6 @@
-LANGUAGE_NAME := tree-sitter-lua
-HOMEPAGE_URL := https://github.com/tree-sitter-grammars/tree-sitter-lua
+LANGUAGE_NAME := tree-sitter-lyra
+HOMEPAGE_URL := https://github.com/HasSak-47/tree-sitter-lyra
+DESCRIPTION := Lyra+Lua grammar for tree-sitter
 VERSION := 0.5.0
 
 # repository
@@ -79,7 +80,7 @@ $(PARSER): $(SRC_DIR)/grammar.json
 	$(TS) generate $^
 
 install: all
-	install -d '$(DESTDIR)$(DATADIR)'/tree-sitter/queries/lua '$(DESTDIR)$(INCLUDEDIR)'/tree_sitter '$(DESTDIR)$(PCLIBDIR)' '$(DESTDIR)$(LIBDIR)'
+	install -d '$(DESTDIR)$(DATADIR)'/tree-sitter/queries/lyra '$(DESTDIR)$(INCLUDEDIR)'/tree_sitter '$(DESTDIR)$(PCLIBDIR)' '$(DESTDIR)$(LIBDIR)'
 	install -m644 bindings/c/tree_sitter/$(LANGUAGE_NAME).h '$(DESTDIR)$(INCLUDEDIR)'/tree_sitter/$(LANGUAGE_NAME).h
 	install -m644 $(LANGUAGE_NAME).pc '$(DESTDIR)$(PCLIBDIR)'/$(LANGUAGE_NAME).pc
 	install -m644 lib$(LANGUAGE_NAME).a '$(DESTDIR)$(LIBDIR)'/lib$(LANGUAGE_NAME).a
@@ -94,7 +95,7 @@ else
 	cd '$(DESTDIR)$(LIBDIR)' && ln -sf lib$(LANGUAGE_NAME).$(SOEXTVER_MAJOR) lib$(LANGUAGE_NAME).$(SOEXT)
 endif
 ifneq ($(wildcard queries/*.scm),)
-	install -m644 queries/*.scm '$(DESTDIR)$(DATADIR)'/tree-sitter/queries/lua
+	install -m644 queries/*.scm '$(DESTDIR)$(DATADIR)'/tree-sitter/queries/lyra
 endif
 
 uninstall:
@@ -104,7 +105,7 @@ uninstall:
 		'$(DESTDIR)$(LIBDIR)'/lib$(LANGUAGE_NAME).$(SOEXT) \
 		'$(DESTDIR)$(INCLUDEDIR)'/tree_sitter/$(LANGUAGE_NAME).h \
 		'$(DESTDIR)$(PCLIBDIR)'/$(LANGUAGE_NAME).pc
-	$(RM) -r '$(DESTDIR)$(DATADIR)'/tree-sitter/queries/lua
+	$(RM) -r '$(DESTDIR)$(DATADIR)'/tree-sitter/queries/lyra
 
 clean:
 	$(RM) $(OBJS) $(LANGUAGE_NAME).pc lib$(LANGUAGE_NAME).a lib$(LANGUAGE_NAME).$(SOEXT) lib$(LANGUAGE_NAME).dll.a

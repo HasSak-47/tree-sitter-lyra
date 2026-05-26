@@ -25,10 +25,10 @@ type NodeInfo =
  *
  * @example
  * import Parser from "tree-sitter";
- * import Lua from "tree-sitter-lua";
+ * import Lyra from "tree-sitter-lyra";
  *
  * const parser = new Parser();
- * parser.setLanguage(Lua);
+ * parser.setLanguage(Lyra);
  */
 declare const binding: {
   /**

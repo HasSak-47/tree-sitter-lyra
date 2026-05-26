@@ -2,10 +2,11 @@
   "$schema": "https://tree-sitter.github.io/tree-sitter/assets/schemas/config.schema.json",
   "grammars": [
     {
-      "name": "lua",
-      "scope": "source.lua",
+      "name": "lyra",
+      "scope": "source.lyra",
       "path": ".",
       "file-types": [
+        "lyra_script",
         "lua"
       ],
       "highlights": "queries/highlights.scm",
@@ -20,13 +21,12 @@
     "license": "MIT",
     "authors": [
       {
-        "name": "Munif Tanjim",
-        "email": "hello@muniftanjim.dev",
-        "url": "https://muniftanjim.dev"
+        "name": "Daniel Alanis",
+        "email": "ulises.alanis.255@gmail.com"
       }
     ],
     "links": {
-      "repository": "https://github.com/tree-sitter-grammars/tree-sitter-lua"
+      "repository": "https://github.com/HasSak-47/tree-sitter-lyra"
     }
   },
   "bindings": {

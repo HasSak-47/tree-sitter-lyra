@@ -1,14 +1,13 @@
 {
-  "name": "@tree-sitter-grammars/tree-sitter-lua",
+  "name": "tree-sitter-lyra",
   "version": "0.5.0",
-  "description": "Lua grammar for tree-sitter",
+  "description": "Lyra+Lua grammar for tree-sitter",
   "type": "module",
-  "repository": "https://github.com/tree-sitter-grammars/tree-sitter-lua",
+  "repository": "https://github.com/HasSak-47/tree-sitter-lyra",
   "license": "MIT",
   "author": {
-    "name": "Munif Tanjim",
-    "email": "hello@muniftanjim.dev",
-    "url": "https://muniftanjim.dev"
+    "name": "Daniel Alanis",
+    "email": "ulises.alanis.255@gmail.com"
   },
   "main": "bindings/node",
   "types": "bindings/node",
