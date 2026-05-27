@@ -6,14 +6,14 @@
       "scope": "source.lyra",
       "path": ".",
       "file-types": [
-        "lyra_script",
+        "lyra",
         "lua"
       ],
       "highlights": "queries/highlights.scm",
       "injections": "queries/injections.scm",
       "locals": "queries/locals.scm",
       "tags": "queries/tags.scm",
-      "injection-regex": "^lua$"
+      "injection-regex": "^lyra$"
     }
   ],
   "metadata": {
