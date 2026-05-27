@@ -12,6 +12,73 @@
 
 (break_statement) @keyword
 
+; Lyra
+(lyra_statement
+  "$" @punctuation.special)
+
+(lyra_pipeline
+  "!" @keyword.operator)
+
+[
+  "|"
+  "&"
+] @operator
+
+(lyra_subshell
+  [
+    "("
+    ")"
+  ] @punctuation.bracket)
+
+(lyra_command_subst
+  [
+    "$("
+    ")"
+  ] @embedded)
+
+(lyra_command_subst_immediate
+  [
+    (lyra_command_subst_start_immediate)
+    ")"
+  ] @embedded)
+
+(lyra_variable
+  "$" @punctuation.special)
+
+(lyra_variable
+  [
+    "${"
+    "}"
+  ] @punctuation.special)
+
+(lyra_variable_immediate
+  "$" @punctuation.special)
+
+(lyra_variable_immediate
+  [
+    "${"
+    "}"
+  ] @punctuation.special)
+
+(lyra_redir_op) @operator
+
+(lyra_fd
+  (lyra_digits) @number)
+
+(lyra_param_expr) @string.special
+
+(lyra_assignment
+  (lyra_name
+    (identifier) @variable))
+
+(lyra_cmd_word
+  (lyra_word
+    (lyra_word_head
+      (identifier) @function.call)))
+
+(lyra_literal) @string.special
+(lyra_literal_immediate) @string.special
+
 (do_statement
   [
     "do"
@@ -202,3 +269,27 @@
 (string) @string
 
 (escape_sequence) @string.escape
+
+; Lyra priority overrides
+(lyra_variable
+  (lyra_name
+    (identifier) @variable))
+
+(lyra_variable_immediate
+  (lyra_name
+    (identifier) @variable))
+
+(lyra_cmd_word
+  (lyra_word
+    (lyra_word_head
+      (identifier) @function.call)))
+
+(lyra_cmd_suffix
+  (lyra_word
+    (lyra_word_head
+      (identifier) @string.special)))
+
+(lyra_redirection
+  (lyra_word
+    (lyra_word_head
+      (identifier) @string.special)))
