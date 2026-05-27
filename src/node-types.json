@@ -1071,21 +1071,6 @@
     }
   },
   {
-    "type": "lyra_name",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "identifier",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "lyra_pipeline",
     "named": true,
     "fields": {},
@@ -1270,10 +1255,6 @@
       "required": true,
       "types": [
         {
-          "type": "identifier",
-          "named": true
-        },
-        {
           "type": "lyra_command_subst",
           "named": true
         },
@@ -1283,14 +1264,6 @@
         },
         {
           "type": "lyra_variable",
-          "named": true
-        },
-        {
-          "type": "number",
-          "named": true
-        },
-        {
-          "type": "string",
           "named": true
         }
       ]
@@ -1884,6 +1857,10 @@
   },
   {
     "type": "lyra_literal_immediate",
+    "named": true
+  },
+  {
+    "type": "lyra_name",
     "named": true
   },
   {

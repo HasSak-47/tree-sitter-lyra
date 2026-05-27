@@ -33,7 +33,7 @@ const optional_block = ($) => alias(optional($._block), $.block);
 const name_list = ($) => list_seq(field("name", $.identifier), ",");
 
 export default grammar({
-  name: "lua",
+  name: "lyra",
 
   extras: ($) => [$.comment, /\s/],
 
@@ -45,8 +45,6 @@ export default grammar({
     $._block_string_start,
     $._block_string_content,
     $._block_string_end,
-
-    $._lyra_line_end,
   ],
 
   supertypes: ($) => [$.statement, $.expression, $.declaration, $.variable],
@@ -70,7 +68,7 @@ export default grammar({
       ),
 
     hash_bang_line: (_) => /#.*/,
-    lyra_statement: ($) => seq("$", $.lyra_list, $._lyra_line_end),
+    lyra_statement: ($) => seq("$", $.lyra_list),
     lyra_list: ($) => seq($.lyra_pipeline, repeat(seq("&", $.lyra_pipeline))),
     lyra_pipeline: ($) =>
       seq(optional("!"), $.lyra_command, repeat(seq("|", $.lyra_command))),
@@ -93,14 +91,7 @@ export default grammar({
     lyra_assignment: ($) => seq($.lyra_name, "=", $.lyra_word),
     lyra_word: ($) => seq($.lyra_word_head, repeat($.lyra_word_continuation)),
     lyra_word_head: ($) =>
-      choice(
-        $.identifier,
-        $.number,
-        $.string,
-        $.lyra_literal,
-        $.lyra_variable,
-        $.lyra_command_subst,
-      ),
+      choice($.lyra_literal, $.lyra_variable, $.lyra_command_subst),
     lyra_word_continuation: ($) =>
       choice(
         $.lyra_literal_immediate,
@@ -123,10 +114,10 @@ export default grammar({
     lyra_fd: ($) => $.lyra_digits,
     lyra_redir_op: (_) =>
       choice("<", ">", ">>", "<>", "<<", "<<-", ">&", "<&", ">|", ">&-", "<&-"),
-    lyra_name: ($) => $.identifier,
+    lyra_name: (_) => /[A-Za-z_][A-Za-z0-9_]*/,
     lyra_digits: (_) => /[0-9]+/,
-    lyra_literal: (_) => token(prec(-1, /[^$|&<>()\s]+/)),
-    lyra_literal_immediate: (_) => token.immediate(prec(-1, /[^$|&<>()\s]+/)),
+    lyra_literal: (_) => /[^$|&<>()\s]+/,
+    lyra_literal_immediate: (_) => token.immediate(/[^$|&<>()\s]+/),
     lyra_param_expr: (_) => /[^}]+/,
 
     // block ::= {stat} [retstat]
