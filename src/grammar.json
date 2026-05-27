@@ -89,6 +89,10 @@
         {
           "type": "SYMBOL",
           "name": "lyra_list"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_lyra_line_end"
         }
       ]
     },
@@ -289,6 +293,18 @@
     "lyra_word_head": {
       "type": "CHOICE",
       "members": [
+        {
+          "type": "SYMBOL",
+          "name": "identifier"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "number"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "string"
+        },
         {
           "type": "SYMBOL",
           "name": "lyra_literal"
@@ -516,22 +532,33 @@
       ]
     },
     "lyra_name": {
-      "type": "PATTERN",
-      "value": "[A-Za-z_][A-Za-z0-9_]*"
+      "type": "SYMBOL",
+      "name": "identifier"
     },
     "lyra_digits": {
       "type": "PATTERN",
       "value": "[0-9]+"
     },
     "lyra_literal": {
-      "type": "PATTERN",
-      "value": "[^$|&<>()\\s]+"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": -1,
+        "content": {
+          "type": "PATTERN",
+          "value": "[^$|&<>()\\s]+"
+        }
+      }
     },
     "lyra_literal_immediate": {
       "type": "IMMEDIATE_TOKEN",
       "content": {
-        "type": "PATTERN",
-        "value": "[^$|&<>()\\s]+"
+        "type": "PREC",
+        "value": -1,
+        "content": {
+          "type": "PATTERN",
+          "value": "[^$|&<>()\\s]+"
+        }
       }
     },
     "lyra_param_expr": {
@@ -3955,6 +3982,10 @@
     {
       "type": "SYMBOL",
       "name": "_block_string_end"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_lyra_line_end"
     }
   ],
   "inline": [],
